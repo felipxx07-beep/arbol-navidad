@@ -1,0 +1,183 @@
+
+/* 1. Configuración general */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 25px 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  background: radial-gradient(
+    circle at top,
+    #163b56,
+    #06111f 75%
+  );
+}
+
+/* 2. Título */
+h1 {
+  margin: 0;
+  color: #ffe58a;
+  text-align: center;
+  text-shadow: 0 0 15px #ffcc33;
+}
+
+/* 3. Espacio completo del árbol */
+#arbol {
+  position: relative;
+  flex: 0 0 480px;
+  width: 320px;
+  height: 480px;
+  overflow: visible;
+}
+
+/* 4. Estrella */
+#estrella {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  color: gold;
+  font-size: 48px;
+  line-height: 1;
+  text-shadow: 0 0 12px gold;
+  animation: brillar 1.2s infinite alternate;
+}
+
+/* 5. Ramas */
+.copa {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #159447;
+  line-height: 1;
+  white-space: nowrap;
+  text-shadow: 0 4px 10px #000;
+}
+
+#copa-superior {
+  top: 38px;
+  font-size: 115px;
+  z-index: 2;
+}
+
+#copa-media {
+  top: 105px;
+  font-size: 185px;
+  z-index: 2;
+}
+
+#copa-inferior {
+  top: 175px;
+  font-size: 260px;
+  z-index: 2;
+}
+
+/* 6. Tronco: ahora queda debajo de las ramas */
+#tronco {
+  position: absolute;
+  top: 385px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  color: #a86735;
+  font-size: 55px;
+  line-height: 1;
+}
+
+/* 7. Contenedor de las luces */
+#luces {
+  position: absolute;
+  top: 48px;
+  left: 15px;
+  right: 15px;
+  height: 310px;
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* 8. Cada luz */
+.luz {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  opacity: 0.12;
+  box-shadow: none;
+}
+
+/* Solo las luces encendidas parpadean */
+.luz.encendida {
+  animation: parpadeo var(--duracion) infinite alternate;
+  animation-delay: var(--retraso);
+}
+
+/* 9. Parpadeo de las luces */
+@keyframes parpadeo {
+  0% {
+    opacity: 0.35;
+    box-shadow: 0 0 3px 1px currentColor;
+    transform: scale(0.75);
+  }
+
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 12px 4px currentColor;
+    transform: scale(1.2);
+  }
+}
+
+/* 10. Brillo de la estrella */
+@keyframes brillar {
+  from {
+    opacity: 0.65;
+    text-shadow: 0 0 5px gold;
+  }
+
+  to {
+    opacity: 1;
+    text-shadow: 0 0 20px gold;
+  }
+}
+
+/* 11. Botón: queda fuera del árbol y visible */
+button {
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 8px;
+  background: #e6b82e;
+  color: #17202a;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ffda55;
+  transform: scale(1.05);
+}
+
+/* 12. Ajustes para pantallas pequeñas */
+@media (max-width: 380px) {
+  #arbol {
+    transform: scale(0.88);
+    margin-top: -25px;
+    margin-bottom: -25px;
+  }
+
+  h1 {
+    font-size: 25px;
+  }
+}
